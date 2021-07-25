@@ -1,0 +1,33 @@
+
+#countryDiv{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap:10px;
+}
+
+body {
+
+    background-color:indigo;
+    text-align: center;
+    color:red;
+    font-size:20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+.countries{
+    height:750px;
+    width:600px;
+    border:2px solid white;
+    background-color: #fff;
+    margin:15px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px white;
+    border: 2px solid white;
+    padding:10px;
+}
+.country-name{color:blue}
+.country-capital{color:tomato}
+.country-languages{color:lawngreen}
+.country-region{color:darkmagenta}
+.country-area{color:maroon}
+.country-population{color:navy}

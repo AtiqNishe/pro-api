@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+    </style>
+    <title>All Country</title>
+</head>
+<body>
+    <h1>All Country Name</h1>
+    <div id="divCountry"></div>
+    <div id="countryDiv">
+
+    </div>
+    <script>
+       async function dataLoad(){
+            const response = await fetch ('https://restcountries.eu/rest/v2/all')
+            const data = await response.json();
+            
+            showCountry(data);
+           
+        }
+       dataLoad();
+
+
+       function showCountry(data){
+
+         
+          for (let i = 0; i < data.length; i++) {
+              const user = data[i];
+              console.log(user);
+              const country = user.name;
+              const name = user.region;
+              const capitalId = user.capital;
+              const pic = user.flag;
+              const countryLanguage = user.languages[0].name;
+              const countryPopulation = user.population;
+              const countryArea = user.area;
+
+              const parentNode = document.getElementById('countryDiv');
+              const parentCreation = document.createElement('div');
+              parentCreation.className = 'countries';
+
+
+            const countryInfo = `
+            <img src= '${pic}' alt="countryFlag" width="400" height="300">
+              <h1 class="country-name">Country: ${country}</h1> 
+              <h2 class="country-capital">Capital: ${capitalId}</h2> 
+              <h3 class="country-region"> Region: ${name}</h3>
+              <h2 class="country-languages"> Languages: ${countryLanguage}</h2>
+              <h2 class="country-population"> Population: ${countryPopulation}</h2>
+              <h2 class="country-area">Area: ${countryArea}</h2>
+              <button onclick="countryDetails('${country}')">Details</Button>
+
+              
+            
+            `
+            parentCreation.innerHTML = countryInfo;
+
+              parentNode.appendChild(parentCreation);
+           
+          }
+       }
+
+       const countryDetails=(name)=>{
+        
+         const url =` https://restcountries.eu/rest/v2/name/${name}`;
+         fetch(url)
+         .then(res => res.json())
+         .then(data => {
+           countryInformation(data[0])
+
+         })
+         
+       }
+
+       const countryInformation =country=>{
+        
+         const countryD = document.getElementById('divCountry');
+
+         const countryInf = `
+         <img src= '${country.flag}' alt="countryFlag" width="400" height="300">
+         <h1>Country: ${country.name}</h1>
+         <h1> NativeName:  ${country.nativeName}</h1>
+         <h1>Subregion: ${country.subregion}</h1>
+         
+         `
+         countryD.innerHTML=countryInf;
+
+       }
+       
+    </script>
+</body>
+</html>
